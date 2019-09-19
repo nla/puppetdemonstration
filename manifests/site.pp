@@ -1,3 +1,3 @@
 node default {
-  include nginx
+  include module_name
 }
