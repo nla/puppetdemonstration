@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+    - html:/usr/share/nginx/html
+  nginx:
+    container_name: nginx
+    image: "nginx"
+    volumes: 
+      - html:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+  puppet:
+    image: "puppet/puppetserver"
+    environment:
+      - HOSTNAME=puppet
+    volumes:
+      - ./modules:/etc/puppetlabs/code/environments/production/modules
+      - ./manifests:/etc/puppetlabs/code/environments/production/manifests
+volumes:
+  html:  
